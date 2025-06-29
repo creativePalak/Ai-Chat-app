@@ -1,32 +1,32 @@
 import { useEffect } from 'react'
 import { useState } from 'react'
-import io from 'socket.io-client'
+// import io from 'socket.io-client'
 import { Button } from '@/components/ui/button'
-const socket = io('http://localhost:3000')
+// const socket = io('http://localhost:3000')
 
 
 function Chat() {
 
-    const [message, setMessage] = useState('')
+    // const [message, setMessage] = useState('')
 
-    const sendMessage = () => {
-        socket.emit('message', { message: message })
-        setMessage('')
-    }
+    // const sendMessage = () => {
+    //     socket.emit('message', { message: message })
+    //     setMessage('')
+    // }
 
-    const [messages, setMessages] = useState([])
-    const [name, setName] = useState(null)
+    // const [messages, setMessages] = useState([])
+    // const [name, setName] = useState(null)
 
-    useEffect(() => {
-        socket.on('recieve_message', (payload) => {
-            setMessages((prev) => [...prev, payload])
-        })
+    // useEffect(() => {
+    //     socket.on('recieve_message', (payload) => {
+    //         setMessages((prev) => [...prev, payload])
+    //     })
 
-        return () => {
-            socket.off('recieve_message')
-        }
+    //     return () => {
+    //         socket.off('recieve_message')
+    //     }
 
-    }, [])
+    // }, [])
 
 
     return (
