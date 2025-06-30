@@ -17,14 +17,14 @@ function App() {
       } />
       <Route path='/login' element={<Login />} />
       <Route path='/select' element={
-        <AuthMiddleware>
+        // <AuthMiddleware>
           <Select />
-        </AuthMiddleware>
+        // </AuthMiddleware>
       } />
       <Route path='/random' element={
-        <AuthMiddleware>
+        // <AuthMiddleware>
           <Random />
-        </AuthMiddleware>
+        // </AuthMiddleware>
       } />
     </Routes>
   )
