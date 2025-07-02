@@ -11,7 +11,7 @@ export const UserProvider = ({children}) => {
     const [username , setUsername] = useState('')
     const [isLogin , setLogin ] = useState(false)
     return (
-        <User.Provider value={{username,setUsername , isLogin , setLogin}} >
+        <User.Provider value={{username ,setUsername , isLogin , setLogin}} >
             {children}
         </User.Provider>
     )

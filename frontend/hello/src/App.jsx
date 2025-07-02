@@ -6,6 +6,7 @@ import Login from './mycomponents/Login'
 import Home from './mycomponents/Home'
 import AuthMiddleware from './mycomponents/AuthMiddleware'
 import Random from './mycomponents/Random'
+import CustomChat from './mycomponents/CustomChat'
 
 function App() {
   return (
@@ -17,15 +18,16 @@ function App() {
       } />
       <Route path='/login' element={<Login />} />
       <Route path='/select' element={
-        // <AuthMiddleware>
+        <AuthMiddleware>
           <Select />
-        // </AuthMiddleware>
+        </AuthMiddleware>
       } />
       <Route path='/random' element={
-        // <AuthMiddleware>
+        <AuthMiddleware>
           <Random />
-        // </AuthMiddleware>
+        </AuthMiddleware>
       } />
+      <Route path='/room/:roomID' element={<CustomChat/>} />
     </Routes>
   )
 }

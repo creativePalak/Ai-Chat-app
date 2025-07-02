@@ -1,15 +1,17 @@
 import React, { useEffect, useState, useRef } from 'react';
 import Chat from './Chat';
 import socket from '../socket/socket'
-
+import { useLocation } from 'react-router-dom';
 
 function Random() {
   const input = useRef(null);
   const [roomID, setRoomID] = useState(null);
   const [messages, setMessages] = useState([]);
   const [socketID , setSocketID ] = useState(null)
-
-  const sendMsg = () => {
+  const location = useLocation()
+  
+  const sendMsg = (e) => {
+    e.preventDefault()
     if (roomID) {
       const message = input.current.value
       if (message) {
@@ -22,11 +24,11 @@ function Random() {
   };
 
   useEffect(() => {
+
     if (!socket.connected) {
       socket.connect();
     }
 
-    // Set socket ID after connection is established
     socket.on('connect', () => {
       setSocketID(socket.id);
       console.log('Socket connected with ID:', socket.id);
@@ -44,16 +46,35 @@ function Random() {
       console.log(messages)
     });
 
-   
-  }, []);
+    socket.on('disconnect' , () => {
+      setRoomID(false)
+    } )
+
+    socket.on('on:disconnect' , (e) =>{
+      setMessages([])
+      setRoomID(false)
+    })
+
+    return () => {
+      socket.disconnect()
+      socket.off('connect')
+      socket.off('room-assigned')
+      socket.off('room:message')
+      socket.off('disconnect')
+      socket.off('on:disconnect')
+    }
+    
+  }, [location.pathname]);
 
   return (
     <div>
       <Chat
+        roomID={roomID}
         InputRef={input}
         onClick={sendMsg}
         messages={messages}
         socketID={socketID}
+        randomChat={true}
       />
     </div>
   );

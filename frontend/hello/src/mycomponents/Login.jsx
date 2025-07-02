@@ -7,12 +7,14 @@ import { FaEyeSlash } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '@/store/User';
 import { useRef } from 'react';
+import { motion } from "motion/react"
+import { textAnimation , IconAnimation , InputAnimation , ButtonAnimation} from './Animation';
 
 function Login() {
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate()
-  const { username, setUsername , setLogin } = useUser()
+  const { username, setUsername, setLogin } = useUser()
   const [error, setError] = useState({ username: '', password: '' });
 
   const togglePasswordVisibility = () => {
@@ -60,47 +62,78 @@ function Login() {
     console.log(username)
   }
 
+
   return (
-    <div className=' dark min-h-screen flex justify-center items-center bg-background text-gray-100 dark:text-white'>
+    <div className='px-12 lg:px-0 dark min-h-screen flex justify-center items-center bg-background text-gray-100 dark:text-white'>
       <div>
-        <div className='text-4xl my-5' >
+        <motion.div
+          className='text-4xl my-5'
+          {...textAnimation}
+        >
           CREATE YOUR ACCOUNT
-        </div>
+        </motion.div>
         <form onSubmit={onSubmit}>
           <div>
-            <div className='text-lg my-2 text-gray-200' >
+            <motion.div
+              {...textAnimation}
+              className='text-lg my-2 text-gray-200'
+            >
               Username
-            </div>
+            </motion.div>
             <div className='flex items-center gap-5 my-2 '  >
-              <Input className={`text-lg`} placeholder={`tyler durlin`} value={username} onChange={(current) => setUsername(current.target.value)} />
-              <Button className={`cursor-pointer`} onClick={toggleUsername} type='button' >
-                <FaDice size={34} />
-              </Button>
+              <motion.div
+                className='w-full'
+                {...InputAnimation }
+              >
+                <Input
+                  className={`text-lg`} placeholder={`tyler durlin`} value={username} onChange={(current) => setUsername(current.target.value)} />
+              </motion.div>
+              <motion.div
+                {...IconAnimation}
+                >
+                <Button className={`cursor-pointer`} onClick={toggleUsername} type='button' >
+                  <FaDice size={34} />
+                </Button>
+              </motion.div>
             </div>
             {error.username && <div className='my-1 text-red-600 text-sm' > {error.username} </div>}
           </div>
           <div>
-            <div className='text-lg my-2 text-gray-200' >
+            <motion.div
+              {...textAnimation}
+              className='text-lg my-2 text-gray-200'
+            >
               Password
-            </div>
+            </motion.div>
             <div className='flex items-center gap-5 my-2 '  >
-              <Input
+              <motion.div
+                {...InputAnimation}
+                className='w-full'
+              >
+                <Input
                 placeholder='******'
                 value={password}
                 onChange={(current) => setPassword(current.target.value)}
                 type={showPassword ? 'text' : 'password'}
                 className={`text-lg`} />
+              </motion.div>
+              <motion.div {...IconAnimation} >
               <Button className={`cursor-pointer`} onClick={togglePasswordVisibility} type='button' >
                 {
                   showPassword ? <FaEye size={34} /> : <FaEyeSlash size={34} />
                 }
               </Button>
+              </motion.div>
             </div>
             {error.password && <div className='my-1 text-red-600 text-sm' > {error.password} </div>}
           </div>
-          <Button type='submit' className={`text-lg w-full my-2 cursor-pointer `} >
+          <motion.div 
+            {...ButtonAnimation}
+          >
+          <Button type='submit' className={`text-lg  my-2 w-full cursor-pointer `}  >
             Enter
           </Button>
+          </motion.div>
         </form>
       </div>
     </div>
