@@ -27,7 +27,11 @@ function App() {
           <Random />
         </AuthMiddleware>
       } />
-      <Route path='/room/:roomID' element={<CustomChat/>} />
+      <Route path='/room/:roomID' element={
+        <AuthMiddleware>
+          <CustomChat/>
+        </AuthMiddleware>
+        } />
     </Routes>
   )
 }
