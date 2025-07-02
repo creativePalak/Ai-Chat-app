@@ -1,6 +1,8 @@
 import { io } from "socket.io-client";
 
- const socket = io('http://localhost:3000' , {
+const Api = import.meta.env.VITE_SOCKET_API
+
+const socket = io( Api , {
     autoConnect : false
  });
 
