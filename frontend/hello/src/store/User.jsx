@@ -10,8 +10,9 @@ export const useUser = () => {
 export const UserProvider = ({children}) => {
     const [username , setUsername] = useState('')
     const [isLogin , setLogin ] = useState(false)
+    const [darkMode , setDarkMode] = useState(true)
     return (
-        <User.Provider value={{username ,setUsername , isLogin , setLogin}} >
+        <User.Provider value={{username ,setUsername , isLogin , setLogin , darkMode , setDarkMode}} >
             {children}
         </User.Provider>
     )

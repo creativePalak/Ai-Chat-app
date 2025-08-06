@@ -1,14 +1,16 @@
-import React from 'react'
+
 import Select from './mycomponents/Select'
 import { Routes, Route } from 'react-router-dom'
-import Chat from './mycomponents/Chat'
 import Login from './mycomponents/Login'
 import Home from './mycomponents/Home'
 import AuthMiddleware from './mycomponents/AuthMiddleware'
 import Random from './mycomponents/Random'
-import CustomChat from './mycomponents/CustomChat'
+import AiChat from './mycomponents/AiChat'
+import MentalHealthResources from './mycomponents/MentalHealthResources'
+import Feedback from './mycomponents/Feedback'
 
 function App() {
+
   return (
     <Routes>
       <Route path='/' element={
@@ -27,11 +29,27 @@ function App() {
           <Random />
         </AuthMiddleware>
       } />
-      <Route path='/room/:roomID' element={
+      <Route path='/chatbot' element={
         <AuthMiddleware>
-          <CustomChat/>
+          <Select />
         </AuthMiddleware>
-        } />
+      } />
+      <Route path='/ai-chat' element={
+        <AuthMiddleware>
+          <AiChat />
+        </AuthMiddleware>
+      } />
+      <Route path="/feedback" element={
+        <AuthMiddleware>
+          <Feedback />
+        </AuthMiddleware>
+      } />
+      <Route path="/resources" element={
+        <AuthMiddleware>
+          <MentalHealthResources />
+        </AuthMiddleware>
+      } />
+
     </Routes>
   )
 }

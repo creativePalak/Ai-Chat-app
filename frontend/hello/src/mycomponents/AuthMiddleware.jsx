@@ -4,8 +4,9 @@ import { useUser } from '@/store/User'
 import { useEffect } from 'react'
 
 function AuthMiddleware({ children }) {
+
     const navigate = useNavigate()
-    const { isLogin } = useUser()
+    const { isLogin, darkMode } = useUser()
 
     useEffect(() => {
         if (!isLogin) {
@@ -17,7 +18,9 @@ function AuthMiddleware({ children }) {
         return null // or a loader, or just nothing
     }
 
-    return <>{children}</>
+    return <div className={`${darkMode ? 'dark' : ''}`}>
+        {children}
+    </div>
 }
 
 export default AuthMiddleware
